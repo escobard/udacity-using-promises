@@ -29,21 +29,24 @@
 			(2) Wrap an event listener for readystatechange in a Promise.
 			(3) If document.readyState is not 'loading', resolve().
 			(4) Test by chaining wrapperResolved(). If all goes well, you should see "Resolved" on the page!
-
+			
 			Make sure you return the Promise!
 			 */
+			var promise = new Promise(function (resolve){
 			document.addEventListener('readystatechange', function() {
-				/*
-				Your code here too!
-				 */
+				if (document.readyState === "interactive") {
+					resolve();
+				};
 			});
+		});
+			return promise;
 		};
 
 		/*
 		Don't forget to test your code!
 		Call wrapperResolved when the DOM is ready.
 		 */
-		// ready()
+		ready(wrapperResolved());
 
 		// Just here for your testing
 		function wrapperResolved() {
