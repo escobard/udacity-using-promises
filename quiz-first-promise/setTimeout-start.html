@@ -17,16 +17,16 @@
 			(2) console.log(this) inside the Promise and observe the results.
 			(3) Make sure wait returns the Promise too!
 			 */
-			new Promise(function(resolve, reject))
-			window.setTimeout(function() {}, ms);
+			var promise = new Promise(function(resolve, reject){
+			resolve(window.setTimeout(function() {}, ms));
+			console.log(this);
+			reject();
+		});
+			return promise;
 		};
 
-		/*
-		Uncomment these lines when you want to test!
-		You'll know you've done it right when the message on the page changes.
-		 */
-		// var milliseconds = 2000;
-		// wait(milliseconds).then(finish);
+ var milliseconds = 2000;
+ wait(milliseconds).then(finish);
 
 
 		// This is just here to help you test.
