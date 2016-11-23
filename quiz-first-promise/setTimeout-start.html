@@ -38,8 +38,9 @@
 			(3) Make sure wait returns the Promise too!
 			 */
 			
-			return new Promise(function(resolve){
+			return new Promise(function(resolve){ // no reason to add a reject since there isnt a reject case in this scenario
 			window.setTimeout(function() {resolve()}, ms);
+			// this will in this case spit out the scope of the promise 
 			console.log(this);
 		});
 		};		
