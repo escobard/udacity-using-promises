@@ -66,15 +66,28 @@ Instructions:
      */
     getJSON('../data/earth-like-results.json')
     .then(function(response){
-    	addSearchHeader(response.query);
-    	console.log(response);
+      // adds the header response after fetch
+      addSearchHeader(response.query);
+      // returns the response results in an array
+      // returning this will make it so that it gets PASSED to the next .then, 
+      return getJSON(response.results[0]);
+      console.log(response);
     })
+    // added catch for first promise after watching instructor notes
+    // adds error catch for first promise
+    .catch(function(){
+      throw Error('Search Request Error');
+    })
+    // grabs the planet data and regenerates the thumbnail acordingly
+    // because the results of GET were passed to this promise via the return of the previous then statement
     .then(function(data){
-    	createPlanetThumb(data);
+      createPlanetThumb(data);
     })
+    /* due to the createPlanet function already haveing the data from the previous .then statement, this can also be used to return the planet thumb
+    .then(createPlanetThumb); */
     .catch(function(error){
-    	addSearchHeader('unknown');
-    	console.log(error)
+      addSearchHeader('unknown');
+      console.log(error)
     })
   });
 })(document);
